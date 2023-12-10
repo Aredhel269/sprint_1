@@ -11,27 +11,26 @@ class Task {
 exports.Task = Task;
 class ToDo {
     constructor() {
-        this.listTasks = [];
+        this.tasks = [];
     }
     createTask(description) {
-        const newTask = {
-            id: this.listTasks.length + 1,
-            description: description,
-            completed: false,
-        };
-        this.listTasks.push(newTask);
+        const newTask = new Task(this.tasks.length + 1, description, false);
+        this.tasks.push(newTask);
     }
     completedTask(id) {
-        const task = this.listTasks.find((t) => t.id === id);
+        const task = this.tasks.find((t) => t.id === id);
         if (task) {
             task.completed = true;
         }
     }
     deleteTask(id) {
-        this.listTasks = this.listTasks.filter((t) => t.id !== id);
+        const index = this.tasks.findIndex((t) => t.id === id);
+        if (index !== -1) {
+            this.tasks.splice(index, 1);
+        }
     }
-    readListTasks() {
-        return this.listTasks;
+    listTasks() {
+        return this.tasks;
     }
 }
 exports.ToDo = ToDo;
