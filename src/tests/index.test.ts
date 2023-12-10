@@ -1,37 +1,35 @@
 const { ToDo } = require('../todo');
 
-test("afegir tasca hauria d'afegir una nova tasca a la llista", () => {
-  // Crea una instància de ToDo
-  const toDo = new ToDo(); 
-  toDo.createTask('Buy groceries'); 
-  expect(toDo.readListTasks()).toEqual([
-    { 
-      id: 1,
-      description: 'Buy groceries', 
-      completed: false }]);
+// Crea una instància de ToDo
+const toDo = new ToDo(); 
+
+// Afegeix una tasca globalment
+toDo.createTask('començar sprint1'); 
+
+test("crear tasca hauria de crear una nova tasca", () => {
+    expect(toDo.listTasks()).toEqual([
+        { 
+            id: 1,
+            description: 'començar sprint1', 
+            completed: false 
+        }]);
 });
 
-
-
-/* describe('Calc', () => {
- test('should return 10 for add(6, 4)', () => {
-   expect(new Calc().add(6, 4)).toBe(10)
- })
- test('should return 9 for add(10, -1)', () => {
-   expect(new Calc().add(10, -1)).toBe(9)
- })
-})
- 
-
-
-
-test('completeTask should mark a task as completed', () => {
-  taskManager.completeTask(0);
-  expect(taskManager.listTasks()[0].completed).toBe(true);
+test('listTasks ha de mostrar la llista', () => {
+    expect(toDo.listTasks()).toEqual([
+        { 
+            id: 1,
+            description: 'començar sprint1', 
+            completed: false 
+        }]);
 });
 
-test('listTasks should return the list of tasks', () => {
-  expect(taskManager.listTasks()).toEqual([{ task: 'Buy groceries', completed: true }]);
+test("completar tasca hauria de marcar com a completada una tasca", () => {
+  toDo.completedTask(1); 
+  expect(toDo.listTasks()[0].completed).toBe(true);
 });
 
-*/
+test("eliminar tasca hauria d'eliminar una tasca", () => {
+  toDo.deleteTask(1); // Elimina la tasca amb id 1
+  expect(toDo.listTasks().length).toBe(0);
+});

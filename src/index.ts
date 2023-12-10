@@ -10,7 +10,7 @@ toDo.createTask('Començar sprint1');
 toDo.completedTask(1);
 
 // Eliminar una tasca
-toDo.deleteTask(1);
+toDo.deleteTask(2);
 
 // Mostrar la llista de tasques
-console.log(toDo.readListTasks());
+console.log(toDo.listTasks());

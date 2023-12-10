@@ -1,4 +1,3 @@
-// todo.ts
 export class Task {
     id: number;
     description: string;
@@ -10,27 +9,36 @@ export class Task {
         this.completed = completed;
     }
 }
-
 export class ToDo {
-    listTasks: Task[] = [];
+    tasks: Task[] = [];
 
     createTask(description: string): void {
-        const newTask: Task = new Task(this.listTasks.length + 1, description, false);
-        this.listTasks.push(newTask);
+        //Crear una nova instància de la classe Task
+        //La classe Task té un constructor amb tres paràmetres
+        const newTask: Task = new Task(this.tasks.length + 1, description, false);
+        this.tasks.push(newTask);
     }
 
     completedTask(id: number): void {
-        const task = this.listTasks.find((t) => t.id === id);
+        // Mètode find per buscar una tasca a la llista (this.tasks) 
+        // amb id com a paràmetre. 
+        const task = this.tasks.find((t) => t.id === id);
         if (task) {
             task.completed = true;
         }
     }
 
     deleteTask(id: number): void {
-        this.listTasks = this.listTasks.filter((t) => t.id !== id);
-    }
+        const index = this.tasks.findIndex((t) => t.id === id);
+        if (index !== -1) {  // -1 significa no trobat
+        // Utilitzem el mètode splice per eliminar la tasca a la posició trobada
+            this.tasks.splice(index, 1);
+            //index: a partir d'on començarà a eliminar
+            //1: quants elements es volen eliminar a partir de l'índex 
+        }
+    }    
 
-    readListTasks(): Task[] {
-        return this.listTasks;
+    listTasks(): Task[] {
+        return this.tasks;
     }
 }
